@@ -255,14 +255,14 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Messages                                                                    #
 ###############################################################################
 
-echo -e "\t- Disable automatic emoji substitution (i.e. use plain text smileys)"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+#echo -e "\t- Disable automatic emoji substitution (i.e. use plain text smileys)"
+#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 echo -e "\t- Disable smart quotes as it's annoying for messages that contain code"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
-echo -e "\t- Disable continuous spell checking"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+#echo -e "\t- Disable continuous spell checking"
+#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 ###############################################################################
 # Personal Additions
@@ -274,7 +274,7 @@ sudo pmset -a sms 0
 echo -e "\t- Speeding up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 sudo pmset -a standbydelay 86400
-echo -e "\t- Disable annoying backswipe in Chrome"
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+#echo -e "\t- Disable annoying backswipe in Chrome"
+#defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
 echo "Done. Please do a restart after these changes."
