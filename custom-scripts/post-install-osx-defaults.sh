@@ -33,6 +33,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo -e "\t- Expanding the save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
@@ -47,6 +48,9 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 echo -e "\t- Saving to disk (not to iCloud) by default"
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+echo -e "\t- Disabling the \"Are you sure you want to open this application?\" dialog"
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo -e "\t- Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
@@ -84,6 +88,17 @@ defaults write -g com.apple.mouse.scaling 2.5
 echo -e "\t- Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
+echo -e "\t- Enabling tap to click for this user and for the login screen"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+echo -e "\t- Mapping bottom right corner to right-click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
 ###############################################################################
 # Screen
 ###############################################################################
@@ -108,6 +123,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 echo -e "\t- Showing status bar in Finder by default"
 defaults write com.apple.finder ShowStatusBar -bool true
 
+echo -e "\t- Showing path bar in Finder by default"
+defaults write com.apple.finder ShowPathbar -bool true
+
 echo -e "\t- Allowing text selection in Quick Look/Preview in Finder by default"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -123,12 +141,21 @@ defaults write com.apple.finder FXPreferredViewStyle Clmv
 echo -e "\t- Avoiding the creation of .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+echo -e "\t- Avoiding the creation of .DS_Store files on USB volumes"
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
 echo -e "\t- Show hidden files in all Finder windows by default"
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
 echo -e "\t- Enabling snap-to-grid for icons on the desktop and in other icon views"
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+echo -e "\t- Showing the ~/Library folder"
+chflags nohidden ~/Library
+
+echo -e "\t- Showing the ~/Volumes folder"
+chflags nohidden ~/Volumes
 
 # Kill all finder instances to reload the new configuration
 killall Finder
