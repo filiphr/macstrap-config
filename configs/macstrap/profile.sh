@@ -46,7 +46,7 @@ export ZSH=~/.oh-my-zsh
 ZSH_THEME="agnoster"
 
 # The plugins to use in the zsh shell
-plugins=(atom git npm bower brew)
+plugins=(atom git npm bower brew mvn)
 
 # Load the oh-my-zsh configuraiton file
 source $ZSH/oh-my-zsh.sh
